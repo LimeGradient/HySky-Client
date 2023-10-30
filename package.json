@@ -1,0 +1,24 @@
+{
+  "name": "skyclient-revamped",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc src/auth.ts && electron src/window.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/msal": "^1.4.5",
+    "@azure/msal-node": "^2.3.0",
+    "@types/electron": "^1.6.10",
+    "@xmcl/core": "^2.12.1",
+    "@xmcl/installer": "^5.2.0",
+    "@xmcl/user": "^4.0.0",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "electron": "^27.0.2",
+    "msal": "^1.4.18"
+  }
+}
