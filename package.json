@@ -2,12 +2,15 @@
   "name": "skyclient-revamped",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "window.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make"
+  },
+  "exports": {
+    "./*": "./src/*.js"
   },
   "author": "",
   "license": "ISC",

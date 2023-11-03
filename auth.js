@@ -110,16 +110,42 @@ const { Authflow, Titles } = require('prismarine-auth')
 const win = require('./window')
 const fs = require('fs')
 const {shell} = require('electron')
+const {open} = require('node:fs/promises')
+const path = require('node:path')
 
 function login(_win) {
+    const mainScript = require('./window')
+
     const userIdentifier = "uid001"
     const cacheDir = './cache/'
     const flow = new Authflow(userIdentifier, cacheDir)
+    
+    const util = require('util');
+    const log_stdout = process.stdout;
+
+    fs.readdir(cacheDir, function(err, files) {
+        if (err) {
+           // some sort of error
+        } else {
+           if (!files.length) {
+            console.info = function (d) { //
+                log_stdout.write(util.format(d) + '\n');
+                if (util.format(d).includes("code")) {
+                    console.log(util.format(d).split("code")[1].split(" ")[1]) // What the fuck is this
+                    _win.webContents.send("setLinkCode", "Microsoft Link Code: " + util.format(d).split("code")[1].split(" ")[1])
+                    shell.openExternal("https://www.microsoft.com/link")
+                }
+            };
+           }
+        }
+    });
+
     
     flow.getMinecraftJavaToken({fetchProfile: true}).then((res) => {
       win.mcToken.setToken = res.token;
       win.mcToken.setProfile = res.profile;
       _win.webContents.send("setSkin", res.profile.id)
+      _win.webContents.send("setLinkCode", "")
     })
 }
 

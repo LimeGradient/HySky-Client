@@ -20,6 +20,7 @@ const window = {
     get getWindow() {return this.window},
     set setWindow(win) {this.window = win}
 }
+exports.window = window
 
 function createWindow () {
     const win = new BrowserWindow({
