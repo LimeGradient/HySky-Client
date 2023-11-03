@@ -1,0 +1,10 @@
+.mcProfile {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.top-right-align-profile {
+    float: left;
+    padding: 5px;
+}
