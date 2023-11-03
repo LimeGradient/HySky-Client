@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron src/window.js"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "author": "",
   "license": "ISC",
@@ -19,7 +21,20 @@
     "@xmcl/user": "^4.0.0",
     "axios": "^1.6.0",
     "dotenv": "^16.3.1",
-    "electron": "^27.0.2",
-    "msal": "^1.4.18"
+    "electron-squirrel-startup": "^1.0.0",
+    "minecraft-auth": "^2.0.4",
+    "minecraft-protocol": "^1.44.0",
+    "msal": "^1.4.18",
+    "msmc": "^4.1.0",
+    "prismarine-auth": "^2.3.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.4.2",
+    "@electron-forge/maker-deb": "^6.4.2",
+    "@electron-forge/maker-rpm": "^6.4.2",
+    "@electron-forge/maker-squirrel": "^6.4.2",
+    "@electron-forge/maker-zip": "^6.4.2",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
+    "electron": "^27.0.3"
   }
 }

@@ -1,7 +1,5 @@
+/* Might revisit this auth code later but its deprecated for now
 const { PublicClientApplication, CryptoProvider } = require('@azure/msal-node');
-const { protocol } = require('electron');
-const url = require('url');
-const path = require('path');
 
 const MSAL_CONFIG = {
     auth: {
@@ -12,7 +10,7 @@ const MSAL_CONFIG = {
 
 const pca = new PublicClientApplication(MSAL_CONFIG);
 // The redirect URI you setup during app registration with a custom file protocol "msal"
-const redirectUri = "msal32aa0eba-d468-4ca2-9149-1643b8c5e254://auth";
+const redirectUri = "msal://redirect";
 
 const cryptoProvider = new CryptoProvider();
 
@@ -22,14 +20,9 @@ const pkceCodes = {
     challenge: "" // Generate a code challenge from the previously generated code verifier
 };
 
-/**
- * Starts an interactive token request
- * @param {object} authWindow: Electron window object
- * @param {object} tokenRequest: token request object with scopes
- */
 async function getTokenInteractive(authWindow, tokenRequest) {
 
-    const {verifier, challenge} = await cryptoProvider.generatePkceCodes();
+    const { verifier, challenge } = await cryptoProvider.generatePkceCodes();
 
     pkceCodes.verifier = verifier;
     pkceCodes.challenge = challenge;
@@ -40,13 +33,11 @@ async function getTokenInteractive(authWindow, tokenRequest) {
         codeChallenge: pkceCodes.challenge, // PKCE Code Challenge
         codeChallengeMethod: pkceCodes.challengeMethod // PKCE Code Challenge Method
     };
-    const authCodeUrl = await pca.getAuthCodeUrl(authCodeUrlParams);
 
+    const authCodeUrl = await pca.getAuthCodeUrl(authCodeUrlParams);
+    //console.log(redirectUri.split(":")[1].replace("//",""))
+    // console.log(authCodeUrl)
     // register the custom file protocol in redirect URI
-    protocol.registerFileProtocol(redirectUri.split(":")[0], (req, callback) => {
-        const requestUrl = url.parse(req.url, true);
-        callback(path.normalize(`${__dirname}/${requestUrl.path}`));
-    });
 
     const authCode = await listenForAuthCode(authCodeUrl, authWindow); // see below
 
@@ -57,16 +48,19 @@ async function getTokenInteractive(authWindow, tokenRequest) {
         codeVerifier: pkceCodes.verifier // PKCE Code Verifier
     });
 
+    const accessToken = authResponse.accessToken;
+    console.log(accessToken)
+
+    login(accessToken)
+
     return authResponse;
 }
 
-/**
- * Listens for auth code response from Azure AD
- * @param {string} navigateUrl: URL where auth code response is parsed
- * @param {object} authWindow: Electron window object
- */
-async function listenForAuthCode(navigateUrl, authWindow) {
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
+async function listenForAuthCode(navigateUrl, authWindow) {
     authWindow.loadURL(navigateUrl);
 
     return new Promise((resolve, reject) => {
@@ -76,10 +70,63 @@ async function listenForAuthCode(navigateUrl, authWindow) {
                 const authCode = parsedUrl.searchParams.get('code');
                 resolve(authCode);
             } catch (err) {
+                console.log("auth code error")
                 reject(err);
             }
         });
     });
 }
+const scopes = {
+    scopes: ["User.Read", "XboxLive.signin"]
+}
+
+function login(accessToken) {
+    fetch("https://user.auth.xboxlive.com/user/authenticate", {
+        method: "POST",
+        mode: 'cors',
+        body: JSON.stringify({
+            "Properties": {
+                "AuthMethod": "RPS",
+                "SiteName": "user.auth.xboxlive.com",
+                "RpsTicket": "d="+accessToken // your access token from the previous step here
+            },
+            "RelyingParty": "http://auth.xboxlive.com",
+            "TokenType": "JWT"
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+        },
+    }).then((res) => {
+        console.log(res)
+    });
+}
 
 exports.getTokenInteractive = getTokenInteractive;
+*/
+
+// We use PrismarineJS now
+const { Authflow, Titles } = require('prismarine-auth')
+const win = require('./window')
+const fs = require('fs')
+const {shell} = require('electron')
+
+function login(_win) {
+    const userIdentifier = "uid001"
+    const cacheDir = './cache/'
+    const flow = new Authflow(userIdentifier, cacheDir)
+    
+    flow.getMinecraftJavaToken({fetchProfile: true}).then((res) => {
+      win.mcToken.setToken = res.token;
+      win.mcToken.setProfile = res.profile;
+      _win.webContents.send("setSkin", res.profile.id)
+    })
+}
+
+function isDirEmpty(dirname) {
+    return fs.promises.readdir(dirname).then(files => {
+        return files.length === 0;
+    });
+}
+
+exports.login = login;
