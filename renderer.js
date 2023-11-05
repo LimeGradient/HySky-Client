@@ -1,4 +1,11 @@
 const { ipcRenderer } = require("electron");
+// const mc = require("./minecraft")
+
+document.querySelector(".launchButton").addEventListener("click", () => {
+    ipcRenderer.invoke("launchMC").then(() => {
+        console.log("[Lime]: Launching MC")
+    })
+})
 
 ipcRenderer.on("setLinkCode", (event, code) => {
     document.getElementById('linkCode').innerHTML = code;

@@ -16,6 +16,7 @@ async function login() {
     authManager.launch("raw").then(async xboxManager => {
         //Generate the Minecraft login token
         token.setToken =  await xboxManager.getMinecraft();
+        // console.log(token.getToken)
         const _token = await xboxManager.getMinecraft();
         win.window.getWindow.webContents.send("setSkin", _token.profile.id)
         win.window.getWindow.webContents.send("setName", _token.profile.name)
@@ -29,7 +30,7 @@ async function launchGame() {
         authorization: token.getToken.mclc(),
         root: "./.minecraft",
         version: {
-            number: "1.18.2",
+            number: "1.8.9",
             type: "release"
         },
         memory: {
