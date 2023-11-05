@@ -1,5 +1,7 @@
+const exec = require('child_process').exec;
 const { Client, Authenticator } = require('minecraft-launcher-core');
 const { Auth } = require('msmc');
+const path = require('path')
 const win = require('./window')
 
 const launcher = new Client();
@@ -24,6 +26,8 @@ async function login() {
 }
 
 async function launchGame() {
+    console.log(path.join(__dirname, "forge-1.8.9.jar"))
+    exec("export JAVA_HOME=`/usr/libexec/java_home -v 1.8`")
     let opts = {
         clientPackage: null,
         // Simply call this function to convert the msmc Minecraft object into a mclc authorization object
@@ -31,14 +35,15 @@ async function launchGame() {
         root: "./.minecraft",
         version: {
             number: "1.8.9",
-            type: "release"
+            type: "release",
         },
+        forge: path.join(__dirname, "forge-1.8.9.jar"),
         memory: {
             max: "6G",
             min: "4G"
         }
     };
-    console.log("Starting!");
+    console.log("[Lime]: Launching MC");
     launcher.launch(opts);
 
     launcher.on('debug', (e) => console.log(e));
