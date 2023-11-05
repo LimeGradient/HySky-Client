@@ -1,5 +1,6 @@
 const { app, BrowserWindow, protocol, net, shell } = require('electron')
 var auth = require('./auth')
+const mc = require('./minecraft')
 const url = require('url')
 const path = require('path')
 
@@ -35,6 +36,10 @@ function createWindow () {
   // auth.getTokenInteractive(win, {})
   win.loadFile('index.html')
   auth.login(win);
+  setTimeout(() => {
+    console.log(mcToken.getToken)
+    mc.launchGame();
+  }, 500)
 }
 
 

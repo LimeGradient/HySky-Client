@@ -140,13 +140,13 @@ function login(_win) {
         }
     });
 
-    
     flow.getMinecraftJavaToken({fetchProfile: true}).then((res) => {
       win.mcToken.setToken = res.token;
       win.mcToken.setProfile = res.profile;
       _win.webContents.send("setSkin", res.profile.id)
       _win.webContents.send("setName", res.profile.name)
       _win.webContents.send("setLinkCode", "")
+      console.log("set token")
     })
 }
 
