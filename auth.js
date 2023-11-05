@@ -1,4 +1,10 @@
 /* Might revisit this auth code later but its deprecated for now
+
+guys terrible news
+I dont need this file but I dont want to delete it
+its a relic of the past auth attempts
+if it bloats software too much i delete
+
 const { PublicClientApplication, CryptoProvider } = require('@azure/msal-node');
 
 const MSAL_CONFIG = {

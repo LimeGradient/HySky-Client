@@ -33,13 +33,8 @@ function createWindow () {
     }
   })
   window.setWindow = win;
-  // auth.getTokenInteractive(win, {})
   win.loadFile('index.html')
-  auth.login(win);
-  setTimeout(() => {
-    console.log(mcToken.getToken)
-    mc.launchGame();
-  }, 500)
+  mc.login();
 }
 
 
