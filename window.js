@@ -1,5 +1,4 @@
-const { app, BrowserWindow, protocol, net, shell, ipcRenderer, ipcMain } = require('electron')
-var auth = require('./auth')
+const { app, BrowserWindow, protocol, ipcMain } = require('electron')
 const mc = require('./minecraft')
 const url = require('url')
 const path = require('path')
@@ -42,6 +41,10 @@ app.whenReady().then(() => {
 
   ipcMain.handle("launchMC", async(event) => {
     mc.launchGame();
+  })
+
+  ipcMain.handle("installMods", async(event) => {
+    mc.installMods();
   })
 
   protocol.registerFileProtocol('msal', (request, callback) => {

@@ -1,8 +1,10 @@
-const exec = require('child_process').exec;
-const { Client, Authenticator } = require('minecraft-launcher-core');
+const fs = require('fs')
+const { Readable } = require('stream');
+const { Client } = require('minecraft-launcher-core');
 const { Auth } = require('msmc');
 const path = require('path')
-const win = require('./window')
+const win = require('./window');
+const { finished } = require('stream');
 
 const launcher = new Client();
 
@@ -12,6 +14,8 @@ const token = {
     get getToken() {return this.token},
     set setToken(t) {this.token = t}
 }
+
+const modLinks = ["https://emulator.limegradient.xyz/hysky/limecapes-1.1.jar"]
 
 async function login() {
     const authManager = new Auth("select_account");
@@ -25,9 +29,19 @@ async function login() {
     });
 }
 
+async function installMods() {
+    for (const link of modLinks) {
+        const res = await fetch(link);
+        const fileName = link.split("/");
+        if (fs.existsSync(path.join(__dirname, `./.minecraft/mods/${fileName[4]}`))) continue;
+        const dest = path.join(__dirname, `./.minecraft/mods/${fileName[4]}`);
+        const fileStream = fs.createWriteStream(dest, { flags: 'wx' });
+        await finished(Readable.from(await res.buffer()).pipe(fileStream));
+    }
+    console.log('[Lime]: All Mods Installed')
+}
+
 async function launchGame() {
-    console.log(path.join(__dirname, "forge-1.8.9.jar"))
-    exec("export JAVA_HOME=`/usr/libexec/java_home -v 1.8`")
     let opts = {
         clientPackage: null,
         // Simply call this function to convert the msmc Minecraft object into a mclc authorization object
@@ -37,11 +51,12 @@ async function launchGame() {
             number: "1.8.9",
             type: "release",
         },
-        forge: path.join(__dirname, "forge-1.8.9.jar"),
+        forge: path.join(__dirname, "forge/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar"),
         memory: {
             max: "6G",
             min: "4G"
-        }
+        },
+        javaPath: "C:\\Program Files\\Java\\jre1.8.0_311\\bin\\java.exe"
     };
     console.log("[Lime]: Launching MC");
     launcher.launch(opts);
@@ -50,5 +65,6 @@ async function launchGame() {
     launcher.on('data', (e) => console.log(e));
 }
 
+exports.installMods = installMods;
 exports.login = login;
 exports.launchGame = launchGame;
