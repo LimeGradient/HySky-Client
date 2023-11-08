@@ -6,7 +6,7 @@
 
 .top-right-align-profile {
     float: left;
-    padding: 5px;
+    padding: 20px;
 }
 
 .launchButton {
@@ -22,5 +22,63 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-family: 'Poppins', sans-serif;
+}
+
+.modInstallPage {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.installMods {
+    display: block;
+    width: 15%;
+    border: none;
+    background-color: #2de35e;
+    padding: 20px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    padding-right: 125px;
+    white-space: nowrap;
+
+}
+.login {
+    display: block;
+    width: 10%;
+    border: none;
+    background-color: #2de35e;
+    padding: 14px 14px;
+    padding-right: 50px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+.loadHomePage {
+    display: block;
+    width: 10%;
+    border: none;
+    background-color: #2de35e;
+    padding: 14px 14px;
+    padding-top: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+.loadModPage {
+    display: block;
+    width: 10%;
+    border: none;
+    background-color: #2de35e;
+    padding: 14px 14px;
+    padding-top: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
     font-family: 'Poppins', sans-serif;
 }

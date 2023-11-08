@@ -33,7 +33,7 @@ function createWindow () {
   })
   window.setWindow = win;
   win.loadFile('index.html')
-  mc.login();
+  mc.checkJava();
 }
 
 app.whenReady().then(() => {
@@ -45,6 +45,10 @@ app.whenReady().then(() => {
 
   ipcMain.handle("installMods", async(event) => {
     mc.installMods();
+  })
+
+  ipcMain.handle("login", async(event) => {
+    mc.login();
   })
 
   protocol.registerFileProtocol('msal', (request, callback) => {
