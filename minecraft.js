@@ -6,7 +6,6 @@ const path = require('path')
 const win = require('./window');
 const { finished } = require('stream');
 const {readdir} = require("fs/promises");
-const { ipcRenderer } = require('electron');
 
 const launcher = new Client();
 
@@ -17,7 +16,7 @@ const token = {
     set setToken(t) {this.token = t}
 }
 
-const modLinks = ["https://emulator.limegradient.xyz/hysky/limecapes-1.1.jar"]
+const modLinks = ["limecapes-1.1.jar", 'optifine.jar']
 
 let javaPath;
 
@@ -34,13 +33,12 @@ async function login() {
 }
 
 async function installMods() {
-    for (const link of modLinks) {
-        const res = await fetch(link);
-        const fileName = link.split("/");
-        if (fs.existsSync(path.join(__dirname, `./.minecraft/mods/${fileName[4]}`))) continue;
-        const dest = path.join(__dirname, `./.minecraft/mods/${fileName[4]}`);
+    for (const file of modLinks) {
+        const res = await fetch(`https://emulator.limegradient.xyz/hysky/${file}`);
+        if (fs.existsSync(path.join(__dirname, `./.minecraft/mods/${file}`))) continue;
+        const dest = path.join(__dirname, `./.minecraft/mods/${file}`);
         const fileStream = fs.createWriteStream(dest, { flags: 'wx' });
-        await finished(Readable.from(await res.buffer()).pipe(fileStream));
+        await finished(Readable.from(await res.body).pipe(fileStream), (err) => console.log(err));
     }
     console.log('[Lime]: All Mods Installed')
 }
@@ -50,7 +48,7 @@ function checkJava() {
     if (process.platform === "darwin") {
         getJavaVM("/Library/Java/JavaVirtualMachines/").then((dirs) => {
             for (const dir of dirs) {
-                if (dir.includes("1.8")) {
+                if (dir.includes("1.8") && dir.includes("202")) {
                     javaPath = path.join("/Library/Java/JavaVirtualMachines/", dir, "/Contents/Home/bin/java")
                     console.log(`[Lime]: Set Java Path to ${javaPath}`)
                 }
