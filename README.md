@@ -1,3 +1,12 @@
+# Todo
+<ul>
+<li>Signout Button</li>
+<li>Better Looking UI</li>
+<li>More Mods (Possible Mod Config in Launcher)</li>
+<li>Custom Music Packs</li>
+<li>(Possible) Custom API for launcher appearence modding</li>
+</ul>
+
 # HySky Client
 <h3 style="font-weight: bold;">What in the world is HySky Client?</h3>
 HySky Client is a simple Open Source Forge Based Minecraft Client (as if there isnt enough of them already) created by LimeGradient. It was made for the soul purpose to show his friend that he could make a good enough client. 
@@ -70,10 +79,3 @@ npm start
 Send a PR Request and ill look it over and decide its fate
 
 <br>
-
-# Todo
-<ul>
-<li>Make Original Cape Ideas</li>
-<li>Get someone with more frontend knowledge to make it more pretty</li>
-<li>Maybe dont use personal domain that could expire any day in March 2024</li>
-</ul>
