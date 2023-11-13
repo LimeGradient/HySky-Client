@@ -6,8 +6,10 @@ const path = require('path')
 const win = require('./window');
 const { finished } = require('stream');
 const {readdir} = require("fs/promises");
+const storage = require("electron-json-storage")
 
 const launcher = new Client();
+console.log(storage.getDefaultDataPath())
 
 const token = {
     token: null,
@@ -16,9 +18,21 @@ const token = {
     set setToken(t) {this.token = t}
 }
 
-const modLinks = ["limecapes-1.1.jar", 'optifine.jar']
-
 let javaPath;
+
+async function refreshLogin() {
+    storage.get('mc', (err, data) => {
+        if (err) throw err;
+        const authManager = new Auth("login");
+        console.log(data.token)
+        authManager.refresh(data.token).then(async xboxManager => {
+            token.setToken =  await xboxManager.getMinecraft();
+            const _token = await xboxManager.getMinecraft();
+            win.window.getWindow.webContents.send("setSkin", _token.profile.id)
+            win.window.getWindow.webContents.send("setName", _token.profile.name)
+        }).catch((err) => console.log(err))
+    })
+}
 
 async function login() {
     const authManager = new Auth("select_account");
@@ -27,20 +41,20 @@ async function login() {
         token.setToken =  await xboxManager.getMinecraft();
         // console.log(token.getToken)
         const _token = await xboxManager.getMinecraft();
+        storage.set('mc', {token: xboxManager.msToken, id: _token.profile.id}, (err) => {if (err) throw err;});
         win.window.getWindow.webContents.send("setSkin", _token.profile.id)
         win.window.getWindow.webContents.send("setName", _token.profile.name)
-    });
+    }).catch((err) => console.log(err));
 }
 
-async function installMods() {
-    for (const file of modLinks) {
-        const res = await fetch(`https://emulator.limegradient.xyz/hysky/${file}`);
-        if (fs.existsSync(path.join(__dirname, `./.minecraft/mods/${file}`))) continue;
-        const dest = path.join(__dirname, `./.minecraft/mods/${file}`);
-        const fileStream = fs.createWriteStream(dest, { flags: 'wx' });
-        await finished(Readable.from(await res.body).pipe(fileStream), (err) => console.log(err));
-    }
-    console.log('[Lime]: All Mods Installed')
+async function installMod(file) {
+    console.log(file)
+    const res = await fetch(`https://emulator.limegradient.xyz/hysky/${file}.jar`);
+    if (fs.existsSync(path.join(__dirname, `./.minecraft/mods/${file}.jar`))) return;
+    const dest = path.join(__dirname, `./.minecraft/mods/${file}.jar`);
+    const fileStream = fs.createWriteStream(dest, { flags: 'wx' });
+    await finished(Readable.from(await res.body).pipe(fileStream), (err) => console.log(err));
+    console.log(`[Lime]: ${file.toUpperCase()} Installed`)
 }
 
 function checkJava() {
@@ -48,7 +62,7 @@ function checkJava() {
     if (process.platform === "darwin") {
         getJavaVM("/Library/Java/JavaVirtualMachines/").then((dirs) => {
             for (const dir of dirs) {
-                if (dir.includes("1.8") && dir.includes("202")) {
+                if (dir.includes("1.8")) {
                     javaPath = path.join("/Library/Java/JavaVirtualMachines/", dir, "/Contents/Home/bin/java")
                     console.log(`[Lime]: Set Java Path to ${javaPath}`)
                 }
@@ -88,7 +102,8 @@ async function launchGame() {
     launcher.on('close', (e) => win.window.getWindow.webContents.send('mcClosed'))
 }
 
-exports.installMods = installMods;
+exports.installMod = installMod;
 exports.login = login;
 exports.launchGame = launchGame;
 exports.checkJava = checkJava;
+exports.refreshLogin = refreshLogin;

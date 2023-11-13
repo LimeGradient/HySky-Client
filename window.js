@@ -1,7 +1,8 @@
-const { app, BrowserWindow, protocol, ipcMain } = require('electron')
+const { app, BrowserWindow, protocol, ipcMain, ipcRenderer } = require('electron')
 const mc = require('./minecraft')
 const url = require('url')
 const path = require('path')
+const storage = require('electron-json-storage');
 
 const mcToken = {
     mcToken: null,
@@ -26,6 +27,7 @@ function createWindow () {
     const win = new BrowserWindow({
     width: 1280,
     height: 720,
+    title: "HySky Client",
     webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
@@ -34,6 +36,12 @@ function createWindow () {
   window.setWindow = win;
   win.loadFile('index.html')
   mc.checkJava();
+  storage.has('mc', (err, hasKey) => {
+    if (err) throw err;
+    if (hasKey) {
+      mc.refreshLogin();  
+    }
+  })
 }
 
 app.whenReady().then(() => {
@@ -43,20 +51,14 @@ app.whenReady().then(() => {
     mc.launchGame();
   })
 
-  ipcMain.handle("installMods", async(event) => {
-    mc.installMods();
+  ipcMain.handle("installMods", async(event, mods) => {
+    for (const mod in mods) {
+      mc.installMod(mods[mod])
+    }
   })
 
   ipcMain.handle("login", async(event) => {
     mc.login();
-  })
-
-  protocol.registerFileProtocol('msal', (request, callback) => {
-    const requestUrl = url.parse(request.url, true);
-    callback({path: path.normalize(`${__dirname}/index.html${requestUrl.search}`)});
-    setTimeout(() => {
-        window.getWindow.loadFile('index.html');
-    }, 5000)
   })
 
   app.on('activate', () => {
@@ -71,4 +73,3 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 })
-// r3f8Q~DjH-oVvUj3ffwIxJr26G5UcIPdYlORwdmm

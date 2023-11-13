@@ -44,7 +44,34 @@
     font-family: 'Poppins', sans-serif;
     padding-right: 125px;
     white-space: nowrap;
-
+}
+.getCheckedMods {
+    display: block;
+    width: 15%;
+    border: none;
+    background-color: #2de35e;
+    padding: 20px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    padding-right: 125px;
+    white-space: nowrap;
+}
+input[type='checkbox'] {
+    --webkit-appearance:none;
+    width:30px;
+    height:30px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+}
+input[type='checkbox']:checked {
+    background: #abd;
+}
+label {
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 .login {
     display: block;
