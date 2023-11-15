@@ -57,8 +57,8 @@ async function login() {
 async function installMod(file) {
     console.log(file)
     const res = await fetch(`https://emulator.limegradient.xyz/hysky/${file}.jar`);
-    if (fs.existsSync(path.join(__dirname, `./.minecraft/mods/${file}.jar`))) return;
-    const dest = path.join(__dirname, `./.minecraft/mods/${file}.jar`);
+    if (fs.existsSync(path.join(storage.getDefaultDataPath(), `./.minecraft/mods/${file}.jar`))) return;
+    const dest = path.join(storage.getDefaultDataPath(), `./.minecraft/mods/${file}.jar`);
     const fileStream = fs.createWriteStream(dest, { flags: 'wx' });
     await finished(Readable.from(await res.body).pipe(fileStream), (err) => console.log(err));
     console.log(`[Lime]: ${file.toUpperCase()} Installed`)
@@ -88,7 +88,7 @@ async function launchGame() {
             number: "1.8.9",
             type: "release",
         },
-        forge: path.join(__dirname, "forge/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar"),
+        forge: path.join(storage.getDefaultDataPath(), "forge/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar"),
         memory: {
             max: "6G",
             min: "4G"
@@ -100,9 +100,11 @@ async function launchGame() {
 
     launcher.on('debug', (e) => {
         console.log(e)
+        win.window.getWindow.webContents.send("mcConsole", e)
     });
     launcher.on('data', (e) => {
         console.log(e)
+        win.window.getWindow.webContents.send("mcConsole", e)
     });
 
     launcher.on('arguments', (e) => win.window.getWindow.webContents.send("mcLaunched"))

@@ -66,6 +66,8 @@ ipcRenderer.on('logout', (event) => {
     window.location.reload();
 })
 
+ipcRenderer.on('mcConsole', (event, data) => console.log(data))
+
 function openAccountDropdown() {
     document.querySelector(".accDropdown").classList.toggle("show");
     window.onclick = (event) => {

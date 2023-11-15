@@ -1,8 +1,9 @@
-const { app, BrowserWindow, protocol, ipcMain, ipcRenderer } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const mc = require('./minecraft')
-const url = require('url')
 const path = require('path')
 const storage = require('electron-json-storage');
+const fs = require('fs')
+const { finished, Readable } = require('stream');
 
 const mcToken = {
     mcToken: null,
@@ -23,6 +24,15 @@ const window = {
 }
 exports.window = window
 
+async function checkForge() {
+  const res = await fetch(`https://emulator.limegradient.xyz/hysky/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar`);
+  if (fs.existsSync(path.join(storage.getDefaultDataPath(), `forge/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar`))) return;
+  const dest = path.join(storage.getDefaultDataPath(), `forge/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar`);
+  const fileStream = fs.createWriteStream(dest, { flags: 'wx' });
+  await finished(Readable.from(await res.body).pipe(fileStream), (err) => console.log(err));
+  console.log(`[Lime]: Forge Installed`)
+}
+
 function createWindow () {
     const win = new BrowserWindow({
     width: 1280,
@@ -42,6 +52,7 @@ function createWindow () {
       mc.refreshLogin();
     }
   })
+  checkForge()
 }
 
 app.whenReady().then(() => {
