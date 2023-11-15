@@ -28,6 +28,12 @@ document.querySelector(".login").addEventListener("click", () => {
     })
 })
 
+document.querySelector("#logout").addEventListener('click', () => {
+    ipcRenderer.invoke("logout").then(() => {
+        console.log("[Lime]: Logging Out")
+    })
+})
+
 document.querySelector('.getCheckedMods').addEventListener("click", () => {
     var checkedBoxes = document.querySelectorAll('input[name=mod]:checked');
     const ids = []
@@ -46,9 +52,31 @@ ipcRenderer.on("setSkin", (event, profileId) => {
     skinHead.width = 100
     skinHead.height = 100
     skinHead.id = "skinHead"
-    document.querySelector("#skinHolder").appendChild(skinHead)
+    document.querySelector("#skinButton").appendChild(skinHead)
     document.getElementById('skinHead').src = `https://mc-heads.net/avatar/${profileId}`
 });
 
 ipcRenderer.on('mcLaunched', (event) => document.querySelector(".launchButton").disabled = true);
 ipcRenderer.on('mcClosed', (event) => document.querySelector(".launchButton").disabled = false);
+
+ipcRenderer.on('loggingIn', (event) => document.querySelector(".login").disabled = true);
+ipcRenderer.on('loggedIn', (event) => document.querySelector(".login").disabled = false);
+
+ipcRenderer.on('logout', (event) => {
+    window.location.reload();
+})
+
+function openAccountDropdown() {
+    document.querySelector(".accDropdown").classList.toggle("show");
+    window.onclick = (event) => {
+        if (!event.target.matches('#skinButton')) {
+            const dropdowns = document.getElementsByClassName('.accDropdown');
+            for (let i = 0; i < dropdowns.length; i++) {
+                const openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,5 @@
 # Todo
 <ul>
-<li>Signout Button</li>
 <li>Better Looking UI</li>
 <li>More Mods (Possible Mod Config in Launcher)</li>
 <li>Custom Music Packs</li>

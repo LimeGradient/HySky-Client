@@ -39,7 +39,7 @@ function createWindow () {
   storage.has('mc', (err, hasKey) => {
     if (err) throw err;
     if (hasKey) {
-      mc.refreshLogin();  
+      mc.refreshLogin();
     }
   })
 }
@@ -59,6 +59,10 @@ app.whenReady().then(() => {
 
   ipcMain.handle("login", async(event) => {
     mc.login();
+  })
+
+  ipcMain.handle("logout", async(event) => {
+    mc.logout();
   })
 
   app.on('activate', () => {

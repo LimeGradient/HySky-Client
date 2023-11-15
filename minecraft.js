@@ -9,7 +9,7 @@ const {readdir} = require("fs/promises");
 const storage = require("electron-json-storage")
 
 const launcher = new Client();
-console.log(storage.getDefaultDataPath())
+console.log(path.join(storage.getDefaultDataPath(), "mc.json"))
 
 const token = {
     token: null,
@@ -20,12 +20,17 @@ const token = {
 
 let javaPath;
 
+async function logout() {
+    fs.unlink(path.join(storage.getDefaultDataPath(), "mc.json"), (err) => {if (err) throw err})
+    win.window.getWindow.webContents.send("logout");
+}
+
 async function refreshLogin() {
     storage.get('mc', (err, data) => {
         if (err) throw err;
         const authManager = new Auth("login");
-        console.log(data.token)
         authManager.refresh(data.token).then(async xboxManager => {
+            win.window.getWindow.webContents.send("loggingIn");
             token.setToken =  await xboxManager.getMinecraft();
             const _token = await xboxManager.getMinecraft();
             win.window.getWindow.webContents.send("setSkin", _token.profile.id)
@@ -35,6 +40,7 @@ async function refreshLogin() {
 }
 
 async function login() {
+    win.window.getWindow.webContents.send("loggingIn");
     const authManager = new Auth("select_account");
     authManager.launch("raw").then(async xboxManager => {
         //Generate the Minecraft login token
@@ -42,6 +48,7 @@ async function login() {
         // console.log(token.getToken)
         const _token = await xboxManager.getMinecraft();
         storage.set('mc', {token: xboxManager.msToken, id: _token.profile.id}, (err) => {if (err) throw err;});
+        win.window.getWindow.webContents.send("loggedIn");
         win.window.getWindow.webContents.send("setSkin", _token.profile.id)
         win.window.getWindow.webContents.send("setName", _token.profile.name)
     }).catch((err) => console.log(err));
@@ -107,3 +114,4 @@ exports.login = login;
 exports.launchGame = launchGame;
 exports.checkJava = checkJava;
 exports.refreshLogin = refreshLogin;
+exports.logout = logout;

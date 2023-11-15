@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HySky Client</title>
     <link href="index.css" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,14 +14,18 @@
 <body onload="document.querySelector('.homePage').style.visibility = 'visible'; document.querySelector('modInstallPage').style.visibility = 'hidden'">
     <h1 id="linkCode"></h1>
     <div class="mcProfile">
-        <div class="top-right-align-profile" id="skinHolder"></div>
+        <div class="top-right-align-profile" id="skinHolder">
+            <button onclick="openAccountDropdown()" type="submit" id="skinButton"></button>
+            <div class="accDropdown">
+                <a id="logout" href="#">Log Out</a>
+            </div>
+        </div>
         <div class="top-right-align-profile" id="loginHolder">
-            <button class="login">Login</button>
+            <button id="loginButton" class="login">Login</button>
         </div>        
     </div>
     <button class="loadHomePage">Home</button>
     <button class="loadModPage">Mods</button>
-
     <div class="pageContent">
         <div class="homePage">
             <button class="launchButton">Launch Game</button>
