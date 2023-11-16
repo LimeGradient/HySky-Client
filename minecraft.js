@@ -93,7 +93,19 @@ function checkJava() {
     }
 }
 
+async function checkForge() {
+    const res = await fetch(`https://emulator.limegradient.xyz/hysky/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar`);
+    if (fs.existsSync(path.join(storage.getDefaultDataPath(), `forge/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar`))) return;
+    fs.mkdirSync(path.join(storage.getDefaultDataPath(), "forge"))
+    const dest = path.join(storage.getDefaultDataPath(), `forge/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar`);
+    const fileStream = fs.createWriteStream(dest, { flags: 'wx' });
+    await finished(Readable.from(await res.body).pipe(fileStream), (err) => console.log(err));
+    console.log(`[Lime]: Forge Installed`)
+    window.getWindow.webContents.send("mcConsole", '[Lime]: Forge Installed')
+  }
+
 async function launchGame() {
+    checkForge()
     let opts = {
         clientPackage: null,
         // Simply call this function to convert the msmc Minecraft object into a mclc authorization object
@@ -105,7 +117,7 @@ async function launchGame() {
         },
         forge: path.join(storage.getDefaultDataPath(), "forge/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar"),
         memory: {
-            max: "6G",
+            max: "4G",
             min: "4G"
         },
         javaPath: javaPath
