@@ -56,9 +56,14 @@ async function login() {
 
 async function installMod(file) {
     console.log(file)
+    if (process.platform === "darwin" && file === "optifine-1.8.9") file = "betterfps"
     const res = await fetch(`https://emulator.limegradient.xyz/hysky/${file}.jar`);
-    if (fs.existsSync(path.join(storage.getDefaultDataPath(), `./.minecraft/mods/${file}.jar`))) return;
-    const dest = path.join(storage.getDefaultDataPath(), `./.minecraft/mods/${file}.jar`);
+    if (!fs.existsSync(path.join(storage.getDefaultDataPath(), ".minecraft/mods"))) {
+        fs.mkdirSync(path.join(storage.getDefaultDataPath(), ".minecraft"))
+        fs.mkdirSync(path.join(storage.getDefaultDataPath(), ".minecraft/mods"))
+    }
+    if (fs.existsSync(path.join(storage.getDefaultDataPath(), `.minecraft/mods/${file}.jar`))) return;
+    const dest = path.join(storage.getDefaultDataPath(), `.minecraft/mods/${file}.jar`);
     const fileStream = fs.createWriteStream(dest, { flags: 'wx' });
     await finished(Readable.from(await res.body).pipe(fileStream), (err) => console.log(err));
     console.log(`[Lime]: ${file.toUpperCase()} Installed`)
@@ -76,6 +81,16 @@ function checkJava() {
             }
         })
     }
+    if (process.platform === "win32") {
+        getJavaVM("C:\\Program Files (x86)\\Java").then((dirs) => {
+            for (const dir of dirs) {
+                if (dir.includes("1.8")) {
+                    javaPath = path.join("C:\\Program Files (x86)\\Java", dir, "\\bin\\java.exe")
+                    console.log(`[Lime]: Set Java Path to ${javaPath}`)
+                }
+            }
+        })
+    }
 }
 
 async function launchGame() {
@@ -83,7 +98,7 @@ async function launchGame() {
         clientPackage: null,
         // Simply call this function to convert the msmc Minecraft object into a mclc authorization object
         authorization: token.getToken.mclc(),
-        root: "./.minecraft",
+        root: path.join(storage.getDefaultDataPath(), ".minecraft"),
         version: {
             number: "1.8.9",
             type: "release",

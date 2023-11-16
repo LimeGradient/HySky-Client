@@ -3,3 +3,5 @@ cache/
 out/
 link.auth
 .minecraft
+forge/
+.DS_Store
