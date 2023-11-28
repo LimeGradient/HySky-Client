@@ -46,6 +46,12 @@ document.querySelector('.getCheckedMods').addEventListener("click", () => {
     })
 })
 
+document.querySelector('.uninstallMods').addEventListener("click", () => {
+    ipcRenderer.invoke("uninstallMods").then(() => {
+        console.log("Uninstalling Mods")
+    })
+})
+
 ipcRenderer.on("setSkin", (event, profileId) => {
     document.querySelector("#loginHolder").removeChild(document.querySelector(".login"))
     const skinHead = document.createElement("img")

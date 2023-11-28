@@ -1,8 +1,8 @@
 # Todo
 <ul>
 <li>Better Looking UI</li>
-<li>More Mods (Possible Mod Config in Launcher)</li>
-<li>Custom Music Packs</li>
+<li>Add Config for Mods in the Launcher</li>
+<li>Settings Menu for Minecraft and Other Related Options</li>
 <li>(Possible) Custom API for launcher appearence modding</li>
 </ul>
 

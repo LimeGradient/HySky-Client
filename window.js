@@ -78,6 +78,10 @@ app.whenReady().then(() => {
     mc.logout();
   })
 
+  ipcMain.handle("uninstallMods", async(event) => {
+    mc.uninstallMod()
+  })
+
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow()

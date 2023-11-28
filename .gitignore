@@ -5,3 +5,5 @@ link.auth
 .minecraft
 forge/
 .DS_Store
+hysky-client-darwin-x64
+dmg/build

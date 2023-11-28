@@ -54,9 +54,19 @@ async function login() {
     }).catch((err) => console.log(err));
 }
 
+async function uninstallMod() {
+    console.log(`Uninstalling mods`);
+    fs.readdir(path.join(storage.getDefaultDataPath(), "/.minecraft/mods"), (err, files) => {
+        if (err) throw err;
+
+        files.forEach((file) => {
+            fs.unlink(path.join(storage.getDefaultDataPath(), `/.minecraft/mods/${file}`), (err) => {if (err) throw err})
+        })
+    })
+}
+
 async function installMod(file) {
     console.log(file)
-    if (process.platform === "darwin" && file === "optifine-1.8.9") file = "betterfps"
     const res = await fetch(`https://emulator.limegradient.xyz/hysky/${file}.jar`);
     if (!fs.existsSync(path.join(storage.getDefaultDataPath(), ".minecraft/mods"))) {
         fs.mkdirSync(path.join(storage.getDefaultDataPath(), ".minecraft"))
@@ -144,3 +154,4 @@ exports.launchGame = launchGame;
 exports.checkJava = checkJava;
 exports.refreshLogin = refreshLogin;
 exports.logout = logout;
+exports.uninstallMod = uninstallMod;
