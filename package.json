@@ -18,6 +18,7 @@
   "dependencies": {
     "@electron-forge/maker-dmg": "^7.1.0",
     "@types/electron": "^1.6.10",
+    "discord-rpc": "^4.0.1",
     "electron-json-storage": "^4.6.0",
     "electron-squirrel-startup": "^1.0.0",
     "minecraft-launcher-core": "^3.17.3",
