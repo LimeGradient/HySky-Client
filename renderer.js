@@ -72,7 +72,9 @@ ipcRenderer.on('logout', (event) => {
     window.location.reload();
 })
 
-ipcRenderer.on('mcConsole', (event, data) => console.log(data))
+ipcRenderer.on('mcConsole', (event, data) => {
+    document.querySelector(".launch-button-data").innerHTML = data;
+})
 
 function openAccountDropdown() {
     document.querySelector(".accDropdown").classList.toggle("show");

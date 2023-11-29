@@ -44,10 +44,12 @@ function createWindow () {
     webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
-    }
+    },
+    icon: "icon.png"
   })
   window.setWindow = win;
   win.loadFile('index.html')
+  if (!fs.existsSync(storage.getDefaultDataPath())) fs.mkdirSync(storage.getDefaultDataPath())
   mc.checkJava();
   storage.has('mc', (err, hasKey) => {
     if (err) throw err;
@@ -56,6 +58,7 @@ function createWindow () {
     }
   })
   checkForge()
+  mc.checkOptions();
   startRPC()
 }
 

@@ -99,6 +99,15 @@ function checkJava() {
                     console.log(`[Lime]: Set Java Path to ${javaPath}`)
                 }
             }
+        }).catch((err) => {
+            getJavaVM("C:\\Program Files\\Java").then((dirs) => {
+                for (const dir of dirs) {
+                    if (dir.includes("1.8")) {
+                        javaPath = path.join("C:\\Program Files\\Java", dir, "\\bin\\java.exe")
+                        console.log(`[Lime]: Set Java Path to ${javaPath}`)
+                    }
+                }
+            })
         })
     }
 }
@@ -112,7 +121,20 @@ async function checkForge() {
     await finished(Readable.from(await res.body).pipe(fileStream), (err) => console.log(err));
     console.log(`[Lime]: Forge Installed`)
     window.getWindow.webContents.send("mcConsole", '[Lime]: Forge Installed')
-  }
+}
+
+async function checkOptions() {
+    if (fs.existsSync(path.join(storage.getDefaultDataPath(), `/.minecraft/options.txt`))) return;
+    if (fs.existsSync(path.join(storage.getDefaultDataPath(), `/.minecraft/optionsof.txt`))) return;
+
+    fs.mkdirSync(path.join(storage.getDefaultDataPath(), "/.minecraft"));
+
+    fs.appendFile(path.join(storage.getDefaultDataPath(), "/.minecraft/options.txt"), '', (err) => {if (err) throw err})
+    fs.appendFile(path.join(storage.getDefaultDataPath(), "/.minecraft/optionsof.txt"), '', (err) => {if (err) throw err})
+
+    fs.copyFile(path.join(__dirname, "mc/options.txt"), path.join(storage.getDefaultDataPath(), "/.minecraft/options.txt"), (err) => {if (err) throw err})
+    fs.copyFile(path.join(__dirname, "mc/optionsof.txt"), path.join(storage.getDefaultDataPath(), "/.minecraft/optionsof.txt"), (err) => {if (err) throw err})
+}
 
 async function launchGame() {
     checkForge()
@@ -155,3 +177,4 @@ exports.checkJava = checkJava;
 exports.refreshLogin = refreshLogin;
 exports.logout = logout;
 exports.uninstallMod = uninstallMod;
+exports.checkOptions = checkOptions;
