@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;800&display=swap" rel="stylesheet">
 </head>
-<body onload="document.querySelector('.homePage').style.visibility = 'visible'; document.querySelector('modInstallPage').style.visibility = 'hidden'">
+<body onload="document.querySelector('.homePage').style.visibility = 'visible'; document.querySelector('modInstallPage').style.visibility = 'hidden'; document.querySelector('settings-page').style.visibility = 'hidden'">
     <h1 id="linkCode"></h1>
     <div class="mcProfile">
         <div class="top-right-align-profile" id="skinHolder">
@@ -25,7 +25,8 @@
         </div>        
     </div>
     <button class="loadHomePage custom-button">Home</button> <div class="divider"></div> 
-    <button class="loadModPage custom-button">Mods</button>
+    <button class="loadModPage custom-button">Mods</button> <div class="divider"></div>
+    <button class="loadSettingsPage custom-button">Settings</button>
     <div class="icon-container">
         <button class="discord-button">
             <svg width="75" height="75" class="discord">
@@ -58,7 +59,7 @@
             <button class="uninstallMods custom-button">Uninstall Mods</button>
         </div>
         <div class="settings-page">
-            <h1></h1>
+            <h1>Settings</h1>
         </div>
     </div>
     <script src="renderer.js"></script>

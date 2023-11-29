@@ -34,6 +34,11 @@ button#skinButton {
     background-color: inherit;
 }
 
+.settings-page {
+    text-align: center;
+    color: white;
+}
+
 .mod-checkbox {
     accent-color: linear-gradient(45deg,
     #ff0000,
@@ -174,7 +179,7 @@ button#skinButton {
     font-size: 14px;
 }
 
-.loadHomePage, .loadModPage {
+.loadHomePage, .loadModPage, .loadSettingsPage {
     width: 10%;
     padding: 14px 14px;
     padding-top: 10px;

@@ -4,6 +4,7 @@ const { ipcRenderer } = require("electron");
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(".homePage").style.visibility = 'visible'
     document.querySelector(".modInstallPage").style.visibility = 'hidden'
+    document.querySelector('.settings-page').style.visibility = 'hidden'
 })
 
 document.querySelector(".launchButton").addEventListener("click", () => {
@@ -15,11 +16,19 @@ document.querySelector(".launchButton").addEventListener("click", () => {
 document.querySelector(".loadModPage").addEventListener("click", () => {
     document.querySelector(".homePage").style.visibility = 'hidden'
     document.querySelector(".modInstallPage").style.visibility = 'visible'
+    document.querySelector('.settings-page').style.visibility = 'hidden'
 })
 
 document.querySelector(".loadHomePage").addEventListener("click", () => {
     document.querySelector(".homePage").style.visibility = 'visible'
     document.querySelector(".modInstallPage").style.visibility = 'hidden'
+    document.querySelector('.settings-page').style.visibility = 'hidden'
+})
+
+document.querySelector('.loadSettingsPage').addEventListener("click", () => {
+    document.querySelector(".homePage").style.visibility = 'hidden'
+    document.querySelector(".modInstallPage").style.visibility = 'hidden'
+    document.querySelector('.settings-page').style.visibility = 'visible'
 })
 
 document.querySelector(".login").addEventListener("click", () => {
@@ -66,7 +75,12 @@ ipcRenderer.on("setSkin", (event, profileId) => {
     skinHead.id = "skinHead"
     document.querySelector("#skinButton").appendChild(skinHead)
     document.getElementById('skinHead').src = `https://mc-heads.net/avatar/${profileId}`
+
 });
+
+ipcRenderer.on("setName", (event, name) => {
+    ipcRenderer.invoke("setRPCName", name);
+})
 
 ipcRenderer.on('mcLaunched', (event) => document.querySelector(".launchButton").disabled = true);
 ipcRenderer.on('mcClosed', (event) => document.querySelector(".launchButton").disabled = false);

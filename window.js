@@ -91,6 +91,10 @@ app.whenReady().then(() => {
     shell.openExternal("https://discord.gg/qNRvgqsBwU")
   })
 
+  ipcMain.handle("setRPCName", async (event, name) => {
+    rpc.setActivity("HySky Launcher", `In Launcher Menu (${name})`);
+  })
+
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow()
