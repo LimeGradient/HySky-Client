@@ -1,10 +1,4 @@
-# Todo
-<ul>
-<li>Better Looking UI</li>
-<li>Add Config for Mods in the Launcher</li>
-<li>Settings Menu for Minecraft and Other Related Options</li>
-<li>(Possible) Custom API for launcher appearence modding</li>
-</ul>
+# Join the [Discord](https://discord.gg/qNRvgqsBwU) for updates and other exclusive things
 
 # HySky Client
 <h3 style="font-weight: bold;">What in the world is HySky Client?</h3>
@@ -78,3 +72,11 @@ npm start
 Send a PR Request and ill look it over and decide its fate
 
 <br>
+
+# Todo
+<ul>
+<li>Better Looking UI</li>
+<li>Add Config for Mods in the Launcher</li>
+<li>Settings Menu for Minecraft and Other Related Options</li>
+<li>(Possible) Custom API for launcher appearence modding</li>
+</ul>

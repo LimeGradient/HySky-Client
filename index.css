@@ -104,7 +104,7 @@ button#skinButton {
 .accDropdown {
     display: none;
     position: absolute;
-    background-color: #545454;
+    background-color: var(--button-color);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -115,6 +115,7 @@ button#skinButton {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    font-family: 'Poppins', sans-serif;
   }
 
 .accDropdown a:hover {background-color: #3e3e3e;}
