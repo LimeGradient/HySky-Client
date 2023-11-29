@@ -4,7 +4,7 @@ const path = require('path')
 const storage = require('electron-json-storage');
 const fs = require('fs')
 const { finished, Readable } = require('stream');
-const { startRPC } = require('./rpc');
+const rpc = require('./rpc');
 
 const mcToken = {
     mcToken: null,
@@ -59,7 +59,7 @@ function createWindow () {
   })
   checkForge()
   mc.checkOptions();
-  startRPC()
+  rpc.startRPC()
 }
 
 app.whenReady().then(() => {

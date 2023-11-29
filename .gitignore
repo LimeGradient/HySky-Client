@@ -6,4 +6,5 @@ link.auth
 forge/
 .DS_Store
 hysky-client-darwin-x64
+hysky-client-win32-x64
 dmg/build

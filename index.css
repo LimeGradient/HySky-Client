@@ -62,8 +62,18 @@ button#skinButton {
     padding-right: 125px;
     white-space: nowrap;
 }
+
+.getCheckedMods {
+    position: fixed;
+    left: 20%;
+    font-size: 17px;
+}
+
 .uninstallMods {
-    font-size: 16px;
+    font-size: 17px;
+    position: fixed;
+    left: 50%;
+    display: inline;
 }
 
 .login {
@@ -97,8 +107,11 @@ button#skinButton {
     transform: translate(-50%, -50%);
 }
 
-.mod-button-container {
-    display: flex;
+.mod-checkbox {
+    column-count: 3;
+    column-gap: 50px;
+    column-width: 200px;
+    padding: 14px 28px;
 }
 
 .accDropdown {

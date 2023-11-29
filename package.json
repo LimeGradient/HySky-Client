@@ -22,7 +22,6 @@
     "discord-rpc": "^4.0.1",
     "electron-json-storage": "^4.6.0",
     "electron-squirrel-startup": "^1.0.0",
-    "electron-storage": "^1.0.7",
     "minecraft-launcher-core": "^3.17.3",
     "msmc": "^4.1.0"
   },
@@ -33,7 +32,6 @@
     "@electron-forge/maker-zip": "^6.4.2",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
     "electron": "^27.0.3",
-    "electron-installer-dmg": "^4.0.0",
-    "electron-wix-msi": "^5.0.0"
+    "electron-installer-dmg": "^4.0.0"
   }
 }
