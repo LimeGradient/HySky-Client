@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, shell } = require('electron')
 const mc = require('./minecraft')
 const path = require('path')
 const storage = require('electron-json-storage');
@@ -85,6 +85,10 @@ app.whenReady().then(() => {
 
   ipcMain.handle("uninstallMods", async(event) => {
     mc.uninstallMod()
+  })
+
+  ipcMain.handle("discordInvite", async(event) => {
+    shell.openExternal("https://discord.gg/qNRvgqsBwU")
   })
 
   app.on('activate', () => {

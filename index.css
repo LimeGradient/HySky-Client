@@ -3,7 +3,8 @@
 }
 
 body {
-    background-color: #E9FFF9;
+    background-image: linear-gradient(to right,#434343 0%, black 100%);
+    font-family: 'Poppins', sans-serif;
 }
 
 input[type='checkbox'] {
@@ -13,6 +14,7 @@ input[type='checkbox'] {
     background: white;
     border-radius: 5px;
     border: 2px solid #555;
+    
 }
 
 input[type='checkbox']:checked {
@@ -22,6 +24,7 @@ input[type='checkbox']:checked {
 label {
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
+    color: white;
 }
 
 button#skinButton {
@@ -29,6 +32,41 @@ button#skinButton {
     cursor: pointer;
     appearance: none;
     background-color: inherit;
+}
+
+.mod-checkbox {
+    accent-color: linear-gradient(45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000);
+}
+
+.icon-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 10px 20px;
+}
+
+.icon-container button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+.divider {
+    width: 5px;
+    height: auto;
+    display: inline-block;
 }
 
 .mcProfile {
@@ -49,18 +87,71 @@ button#skinButton {
     transform: translate(-50%, -50%);
 }
 
-.installMods, .getCheckedMods, .uninstallMods, .login, .loadHomePage, .loadModPage, .launchButton {
-    display: block;
-    width: 15%;
+.custom-button {
+    padding: 0.6em 2em;
     border: none;
-    background-color: var(--button-color);
-    padding: 20px 20px;
-    font-size: 18px;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: #111;
     cursor: pointer;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    padding-right: 125px;
-    white-space: nowrap;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.custom-button:before {
+    content: "";
+    background: linear-gradient(45deg,
+            #ff0000,
+            #ff7300,
+            #fffb00,
+            #48ff00,
+            #00ffd5,
+            #002bff,
+            #7a00ff,
+            #ff00c8,
+            #ff0000);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-button 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+@keyframes glowing-button {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 400% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.custom-button:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #222;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
 }
 
 .getCheckedMods {
@@ -110,7 +201,7 @@ button#skinButton {
 .mod-checkbox {
     column-count: 3;
     column-gap: 50px;
-    column-width: 200px;
+    column-width: 250px;
     padding: 14px 28px;
 }
 

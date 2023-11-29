@@ -52,6 +52,12 @@ document.querySelector('.uninstallMods').addEventListener("click", () => {
     })
 })
 
+document.querySelector('.discord-button').addEventListener("click", () => {
+    ipcRenderer.invoke("discordInvite").then(() => {
+        console.log("Opening Discord")
+    })
+})
+
 ipcRenderer.on("setSkin", (event, profileId) => {
     document.querySelector("#loginHolder").removeChild(document.querySelector(".login"))
     const skinHead = document.createElement("img")
