@@ -1,0 +1,97 @@
+<body
+    onload="document.querySelector('.homePage').style.visibility = 'visible'; document.querySelector('modInstallPage').style.visibility = 'hidden'; document.querySelector('settings-page').style.visibility = 'hidden'"
+    </body>
+    <h1 id="linkCode"></h1>
+    <div class="mcProfile flex fle-row border-2">
+        <div class="top-right-align-profile" id="skinHolder">
+            <button onclick="openAccountDropdown()" type="submit" id="skinButton"></button>
+            <div class="accDropdown">
+                <a id="logout" href="#">Log Out</a>
+            </div>
+        </div>
+        <div class="" id="loginHolder">
+            <button id="loginButton" class="login custom-button">Login</button>
+        </div>
+    </div>
+    <button class="loadHomePage custom-button">Home</button>
+    <div class="divider"></div>
+    <button class="loadModPage custom-button">Mods</button>
+    <div class="divider"></div>
+    <button class="loadSettingsPage custom-button">Settings</button>
+    <div class="icon-container">
+        <button class="discord-button">
+            <svg width="75" height="75" class="discord">
+                <image xlink:href="resources/discord.svg" src="resources/discord.png" width="75" height="75" />
+            </svg>
+        </button>
+    </div>
+    <div class="pageContent">
+        <div class="homePage">
+            <button class="launchButton custom-button">Launch Game</button>
+            <sub class="launch-button-data"></sub>
+        </div>
+        <div class="modInstallPage">
+            <div class="mod-checkbox grid grid-cols-4 h-72">
+                <div>
+                    <input type="checkbox" id="3dskinlayers" name="mod" class="modCheckbox" /> <label
+                        for="3dskinlayers">3D Skin Layers</label> <br>
+                </div>
+                <div>
+                    <input type="checkbox" id="bazarnotifier" name="mod" class="modCheckbox" /> <label
+                        for="bazarnotifier">Bazaar Notifier</label> <br>
+                </div>
+                <div>
+                    <input type="checkbox" id="cowlection" name="mod" class="modCheckbox" /> <label
+                        for="cowlection">Cowlection</label> <br>
+                </div>
+                <div>
+                    <input type="checkbox" id="discordrpc" name="mod" class="modCheckbox" /> <label
+                        for="discordrpc">Discord RPC</label> <br>
+                </div>
+                <div>
+                    <input type="checkbox" id="dungeonrooms" name="mod" class="modCheckbox" /> <label
+                        for="dungeonrooms">Dungeon Rooms</label> <br>
+                </div>
+                <div>
+                    <input type="checkbox" id="dungeonsguide" name="mod" class="modCheckbox" /> <label
+                        for="dungeonsguide">Dungeon Guides</label> <br>
+                </div>
+                <div>
+                    <input type="checkbox" id="hytilsreborn" name="mod" class="modCheckbox" /> <label
+                        for="hytilsreborn">Hytils Reborn</label> <br>
+                </div>
+                <div>
+                    <input type="checkbox" id="limecapes-1.0" name="mod" class="modCheckbox" /> <label
+                        for="limecapes-1.0">Lime Capes</label> <br>
+                </div>
+                <div>
+                    <input type="checkbox" id="optifine-1.8.9" name="mod" class="modCheckbox" /> <label
+                        for="optifine-1.8.9">Optifine</label> <br>
+                </div>
+                <div>
+                    <input type="checkbox" id="skyblockaddons" name="mod" class="modCheckbox" /> <label
+                        for="skyblockaddons">Skyblock Addons</label> <br>
+                </div>
+                <div>
+                    <input type="checkbox" id="skyblockpersonalized" name="mod" class="modCheckbox" /> <label
+                        for="skyblockpersonalized">Skyblock Personalized</label> <br>
+                </div>
+
+                Buttons
+                <div>
+                    <input type="checkbox" id="skytils" name="mod" class="modCheckbox" /> <label
+                        for="skytils">Skytils</label> <br>
+                    <input type="checkbox" id="waveycapes" name="mod" class="modCheckbox" /> <label
+                        for="waveycapes">Wavey Capes</label> <br>
+                </div>
+
+            </div>
+            <div>
+                <button class="getCheckedMods custom-button">Install Mods</button>
+                <button class="uninstallMods custom-button">Uninstall Mods</button>
+            </div>
+        </div>
+        <div class="settings-page">
+            <h1>Settings</h1>
+        </div>
+    </div>
