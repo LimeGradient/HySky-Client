@@ -2,7 +2,7 @@
   "name": "hysky-client",
   "version": "1.0.0",
   "description": "A simple Hypixel Skyblock client with a launcher",
-  "main": "window.js",
+  "main": "src/window.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",
@@ -19,13 +19,14 @@
   "license": "ISC",
   "dependencies": {
     "@electron-forge/maker-dmg": "^7.1.0",
+    "@terascope/fetch-github-release": "^0.8.7",
     "@types/electron": "^1.6.10",
-    "crypto-js": "^4.2.0",
     "discord-rpc": "^4.0.1",
     "electron-json-storage": "^4.6.0",
     "electron-squirrel-startup": "^1.0.0",
     "minecraft-launcher-core": "^3.17.3",
-    "msmc": "^4.1.0"
+    "msmc": "^4.1.0",
+    "octokit": "^3.1.2"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.4.2",

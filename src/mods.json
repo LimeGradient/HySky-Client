@@ -1,0 +1,46 @@
+{
+    "bazaarnotifier": {
+        "user": "symt",
+        "repo": "BazaarNotifier"
+    },
+    "cowlection": {
+        "user": "cow-mc",
+        "repo": "Cowlection"
+    },
+    "dankersskyblockmod": {
+        "user": "bowser0000",
+        "repo": "SkyblockMod"
+    },
+    "dungeonrooms": {
+        "user": "Quantizr",
+        "repo": "DungeonRoomsMod"
+    },
+    "dungeonsguide": {
+        "user": "Dungeons-Guide",
+        "repo": "Skyblock-Dungeons-Guide"
+    },
+    "hytilsreborn": {
+        "user": "Polyfrost",
+        "repo": "Hytils-Reborn"
+    },
+    "notenoughupdates": {
+        "user": "Moulberry",
+        "repo": "NotEnoughUpdates"
+    },
+    "scrollabletooltips": {
+        "user": "Sk1erLLC",
+        "repo": "ScrollableTooltips"
+    },
+    "skyblockaddons": {
+        "user": "BiscuitDevelopment",
+        "repo": "SkyblockAddons"
+    },
+    "skyblockpersonalized": {
+        "user": "Cobble8",
+        "repo": "SkyblockPersonalized"
+    },
+    "skytils": {
+        "user": "Skytils",
+        "repo": "SkytilsMod"
+    }
+}
