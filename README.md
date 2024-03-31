@@ -1,6 +1,6 @@
 # Join the [Discord](https://discord.gg/qNRvgqsBwU) for updates and other exclusive things
 
-# This is the official download page. Anywhere else with a download for this client could be trying to hack you
+## This is the official download page. Anywhere else with a download for this client could be trying to hack you
 
 # HySky Client
 <h3 style="font-weight: bold;">What in the world is HySky Client?</h3>
