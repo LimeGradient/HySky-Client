@@ -15,11 +15,11 @@
     <!-- Navbar -->
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-            <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="./resources/icon.png" class="h-8" alt="Flowbite Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white loadHomePage">HySky Client</span>
             </a>
-            <div class="flex items-center space-x-6 rtl:space-x-reverse">
+            <div class="flex items-center space-x-6 rtl:space-x-reverse" id="loginHolder">
                 <button class="text-white border-2 px-4 py-1 rounded-xl hover:bg-white hover:text-black loginButton" id="login">Login</button>
             </div>
         </div>
@@ -47,10 +47,9 @@
     </nav>
     <!-- /Navbar -->
 
-    
     <div class="flex">
         <!-- Grid-->
-        <div class="grid grid-rows-7 grid-flow-col overflow-auto gap-4 w-2/3 h-96 px-6 py-3">
+        <div class="grid grid-rows-8 grid-flow-col overflow-auto gap-4 w-2/3 h-96 px-6 py-4">
             <!-- 3D Skin Layers -->
             <div class="flex items-center px-4 border border-gray-200 rounded dark:border-gray-700 h-10">
                 <input id="3dskinlayers" type="checkbox" value="" name="mod"
@@ -67,6 +66,11 @@
                 <input id="cowlection" type="checkbox" value="" name="mod"
                     class="w-5 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="cowlection" class="w-52 py-4 ms-2 text-xl font-semibold">Cowlection</label>
+            </div>
+            <div class="flex items-center px-4 border border-gray-200 rounded dark:border-gray-700 h-10">
+                <input id="dankersskyblockmod" type="checkbox" value="" name="mod"
+                    class="w-5 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="discordrpc" class="w-52 py-4 ms-2 text-xl font-semibold">Dankers Skyblock Mod</label>
             </div>
             <div class="flex items-center px-4 border border-gray-200 rounded dark:border-gray-700 h-10">
                 <input id="discordrpc" type="checkbox" value="" name="mod"
@@ -89,14 +93,24 @@
                 <label for="hytilsreborn" class="w-52 py-4 ms-2 text-xl font-semibold">Hytils Reborn</label>
             </div>
             <div class="flex items-center px-4 border border-gray-200 rounded dark:border-gray-700 h-10">
-                <input id="limecapes-1.0" type="checkbox" value="" name="mod"
+                <input id="limecapes-1.1" type="checkbox" value="" name="mod"
                     class="w-5 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="limecapes-1.0" class="w-52 py-4 ms-2 text-xl font-semibold">Lime Capes</label>
+            </div>
+            <div class="flex items-center px-4 border border-gray-200 rounded dark:border-gray-700 h-10">
+                <input id="notenoughupdates" type="checkbox" value="" name="mod"
+                    class="w-5 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="discordrpc" class="w-52 py-4 ms-2 text-xl font-semibold">Not Enough Updates</label>
             </div>
             <div class="flex items-center px-4 border border-gray-200 rounded dark:border-gray-700 h-10">
                 <input id="optifine-1.8.9" type="checkbox" value="" name="mod"
                     class="w-5 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="optifine-1.8.9" class="w-52 py-4 ms-2 text-xl font-semibold">Optifine</label>
+            </div>
+            <div class="flex items-center px-4 border border-gray-200 rounded dark:border-gray-700 h-10">
+                <input id="scrollabletooltips" type="checkbox" value="" name="mod"
+                    class="w-5 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="discordrpc" class="w-52 py-4 ms-2 text-xl font-semibold">Scrollable Tooltips</label>
             </div>
             <div class="flex items-center px-4 border border-gray-200 rounded dark:border-gray-700 h-10">
                 <input id="skyblockaddons" type="checkbox" value="" name="mod"

@@ -2,10 +2,11 @@ const fs = require('fs')
 const { Readable } = require('stream');
 const { Client } = require('minecraft-launcher-core');
 const { Auth } = require('msmc');
-const path = require('path')
-const win = require('./window');
 const { finished } = require('stream');
 const {readdir} = require("fs/promises");
+const crypto = require('crypto')
+const path = require('path')
+const win = require('./window');
 const storage = require("electron-json-storage")
 
 const launcher = new Client();
@@ -29,7 +30,12 @@ async function refreshLogin() {
     storage.get('mc', (err, data) => {
         if (err) throw err;
         const authManager = new Auth("login");
-        authManager.refresh(data.token).then(async xboxManager => {
+
+        const key = crypto.createDecipher('aes-128-cbc', data.id)
+        let d_token = key.update(data.token, 'hex', 'utf8')
+        d_token += key.final('utf8')
+        
+        authManager.refresh(d_token).then(async xboxManager => {
             win.window.getWindow.webContents.send("loggingIn");
             token.setToken =  await xboxManager.getMinecraft();
             const _token = await xboxManager.getMinecraft();
@@ -43,11 +49,16 @@ async function login() {
     win.window.getWindow.webContents.send("loggingIn");
     const authManager = new Auth("select_account");
     authManager.launch("raw").then(async xboxManager => {
-        //Generate the Minecraft login token
         token.setToken =  await xboxManager.getMinecraft();
-        // console.log(token.getToken)
         const _token = await xboxManager.getMinecraft();
-        storage.set('mc', {token: xboxManager.msToken, id: _token.profile.id}, (err) => {if (err) throw err;});
+
+        // console.log(token.getToken.mcToken)
+
+        const key = crypto.createCipher('aes-128-cbc', _token.profile.id)
+        let login_token = key.update(xboxManager.msToken.refresh_token, 'utf8', 'hex')
+        login_token += key.final('hex')
+
+        storage.set('mc', {token: login_token, id: _token.profile.id}, (err) => {if (err) throw err;});
         win.window.getWindow.webContents.send("loggedIn");
         win.window.getWindow.webContents.send("setSkin", _token.profile.id)
         win.window.getWindow.webContents.send("setName", _token.profile.name)
@@ -67,7 +78,7 @@ async function uninstallMod() {
 
 async function installMod(file) {
     console.log(file)
-    const res = await fetch(`https://emulator.limegradient.xyz/hysky/${file}.jar`);
+    const res = await fetch(`https://raw.githubusercontent.com/LimeGradient/HySky-Client/master/mods/hysky/${file}.jar`);
     if (!fs.existsSync(path.join(storage.getDefaultDataPath(), ".minecraft/mods"))) {
         fs.mkdirSync(path.join(storage.getDefaultDataPath(), ".minecraft"))
         fs.mkdirSync(path.join(storage.getDefaultDataPath(), ".minecraft/mods"))
@@ -113,7 +124,7 @@ function checkJava() {
 }
 
 async function checkForge() {
-    const res = await fetch(`https://emulator.limegradient.xyz/hysky/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar`);
+    const res = await fetch(`https://raw.githubusercontent.com/LimeGradient/HySky-Client/master/mods/hysky/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar`);
     if (fs.existsSync(path.join(storage.getDefaultDataPath(), `forge/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar`))) return;
     fs.mkdirSync(path.join(storage.getDefaultDataPath(), "forge"))
     const dest = path.join(storage.getDefaultDataPath(), `forge/forge-1.8.9-11.15.1.2318-1.8.9-universal.jar`);

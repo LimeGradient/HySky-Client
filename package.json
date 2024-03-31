@@ -8,6 +8,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "build-all": "npm run build-macos && npm run build-win",
     "build-macos": "npx electron-packager ./ --platform=darwin --icon=dmg/icon.icns --overwrite && rm -f dmg/build/HySky-Installer.dmg && npx appdmg dmg/dmg.json dmg/build/HySky-Installer.dmg",
     "build-win": "npx electron-packager ./ --platform=win32 --icon=icon.ico --overwrite"
   },
@@ -19,6 +20,7 @@
   "dependencies": {
     "@electron-forge/maker-dmg": "^7.1.0",
     "@types/electron": "^1.6.10",
+    "crypto-js": "^4.2.0",
     "discord-rpc": "^4.0.1",
     "electron-json-storage": "^4.6.0",
     "electron-squirrel-startup": "^1.0.0",
