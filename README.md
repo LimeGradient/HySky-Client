@@ -1,5 +1,7 @@
 # Join the [Discord](https://discord.gg/qNRvgqsBwU) for updates and other exclusive things
 
+# This is the official download page. Anywhere else with a download for this client could be trying to hack you
+
 # HySky Client
 <h3 style="font-weight: bold;">What in the world is HySky Client?</h3>
 HySky Client is a simple Open Source Forge Based Minecraft Client (as if there isnt enough of them already) created by LimeGradient. It was made for the soul purpose to show his friend that he could make a good enough client. 
