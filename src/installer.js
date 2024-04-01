@@ -4,19 +4,23 @@ const path = require('path')
 async function run() {
 
     const msiCreator = new MSICreator({
-        appDirectory: path.join(__dirname, "hysky-client-win32-x64/"),
+        appDirectory: path.join(__dirname, "../hysky-client-win32-x64/"),
         description: 'Hypixel Skyblock Client',
         exe: 'hysky-client',
         name: "HySky-Client",
         manufacturer: 'LimeGradient',
-        version: '1.1.0',
-        outputDirectory: path.join(__dirname, "/build"),
-        icon: "icon.ico"
+        version: '2.0.0',
+        outputDirectory: path.join(__dirname, "../build"),
+        icon: "resources/icon.ico",
+
+        ui: {
+            chooseDirectory: true
+        }
     });
 
-    const supportBinaries = await msiCreator.create();
-
-    await msiCreator.compile();
+    msiCreator.create().then(() => {
+        msiCreator.compile()
+    })
 }
 
 run()

@@ -10,7 +10,7 @@
     "make": "electron-forge make",
     "build-all": "npm run build-macos && npm run build-win",
     "build-macos": "npx electron-packager ./ --platform=darwin --icon=dmg/icon.icns --overwrite && rm -f dmg/build/HySky-Installer.dmg && npx appdmg dmg/dmg.json dmg/build/HySky-Installer.dmg",
-    "build-win": "npx electron-packager ./ --platform=win32 --icon=icon.ico --overwrite"
+    "build-win": "npx electron-packager ./ --platform=win32 --icon=resources/icon.ico --overwrite"
   },
   "exports": {
     "./*": "./src/*.js"
@@ -18,20 +18,16 @@
   "author": "LimeGradient",
   "license": "ISC",
   "dependencies": {
-    "@electron-forge/maker-dmg": "^7.1.0",
     "@terascope/fetch-github-release": "^0.8.7",
     "@types/electron": "^1.6.10",
     "discord-rpc": "^4.0.1",
+    "electron-installer-windows": "^3.0.0",
     "electron-json-storage": "^4.6.0",
-    "electron-squirrel-startup": "^1.0.0",
     "minecraft-launcher-core": "^3.17.3",
-    "msmc": "^4.1.0",
-    "octokit": "^3.1.2"
+    "msmc": "^4.1.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.4.2",
-    "@electron-forge/maker-deb": "^6.4.2",
-    "@electron-forge/maker-squirrel": "^6.4.2",
     "@electron-forge/maker-zip": "^6.4.2",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
     "electron": "^27.0.3",
