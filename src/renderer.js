@@ -1,4 +1,4 @@
-const { ipcRenderer } = require("electron");
+const { ipcRenderer, shell } = require("electron");
 
 document.querySelector(".launchButton").addEventListener("click", () => {
     ipcRenderer.invoke("launchMC").then(() => {
@@ -76,7 +76,11 @@ ipcRenderer.on('logout', (event) => {
 })
 
 ipcRenderer.on('mcConsole', (event, data) => {
-    document.querySelector(".launch-button-data").innerHTML = data;
+    document.querySelector("#mcConsole").innerHTML = data;
+})
+
+ipcRenderer.on('error', (event, errCode, errText) => {
+    document.querySelector("#mcConsole").innerHTML = `ERROR: ${errCode} - ${errText}`
 })
 
 function openAccountDropdown() {
@@ -92,4 +96,8 @@ function openAccountDropdown() {
             }
         }
     }
+}
+
+function openInBrowser(url) {
+    shell.openExternal(url)
 }

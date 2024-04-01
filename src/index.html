@@ -35,11 +35,14 @@
                         <a href="#" class="text-gray-900 dark:text-white hover:border-b-2 py-3 loadSettingsPage">Settings</a>
                     </li>
                     <li>
-                        <a href="https://discord.com/invite/qNRvgqsBwU" class="flex text-gray-900 dark:text-white"><img class="mr-1" src="../resources/discord.png" width="20">  Discord</a>
+                        <a onclick="openInBrowser('https://discord.com/invite/qNRvgqsBwU')" class="flex text-gray-900 dark:text-white"><img class="mr-1" src="../resources/discord.png" width="20">  Discord</a>
                     </li>
                     <li>
-                        <a href="https://github.com/LimeGradient/HySky-Client" class="flex text-gray-900 dark:text-white"><img class="mr-1" src="../resources/github-mark-white.png" width="20">
+                        <a onclick="openInBrowser('https://github.com/LimeGradient/HySky-Client')" class="flex text-gray-900 dark:text-white"><img class="mr-1" src="../resources/github-mark-white.png" width="20">
                             Github</a>
+                    </li>
+                    <li>
+                        <a onclick="openInBrowser('https://github.com/LimeGradient/HySky-Client/wiki')" class="flex text-gray-900 dark:text-white">Help</a>
                     </li>
                 </ul>
             </div>
@@ -49,7 +52,7 @@
 
     <div class="flex">
         <!-- Grid-->
-        <div class="grid grid-rows-8 grid-flow-col overflow-auto gap-4 w-2/3 h-96 px-6 py-4">
+        <div class="grid grid-rows-8 grid-flow-col overflow-auto gap-4 w-2/3 h-160 px-6 py-4">
             <div class="flex items-center px-4 border border-gray-200 rounded dark:border-gray-700 h-10">
                 <input id="bazaarnotifier" type="checkbox" value="" name="mod"
                     class="w-5 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -63,7 +66,7 @@
             <div class="flex items-center px-4 border border-gray-200 rounded dark:border-gray-700 h-10">
                 <input id="dankersskyblockmod" type="checkbox" value="" name="mod"
                     class="w-5 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="dankersskyblockmod" class="w-52 py-4 ms-2 text-xl font-semibold">Dankers Skyblock Mod</label>
+                <label for="dankersskyblockmod" class="w-62 py-4 ms-2 text-xl font-semibold">Dankers' Skyblock Mod</label>
             </div>
             <div class="flex items-center px-4 border border-gray-200 rounded dark:border-gray-700 h-10">
                 <input id="dungeonrooms" type="checkbox" value="" name="mod"
@@ -114,6 +117,8 @@
                 <button class="w-1/2 border-2 rounded-xl h-10 active:bg-gray-100 getCheckedMods">Install Mods</button>
                 <button class="w-1/2 border-2 rounded-xl h-10 active:bg-gray-100 uninstallMods">Uninstall Mods</button>
             </div>
+            <br>
+            <p class="text-gray-900" id="mcConsole"></p>
             
         </div>
         <!-- /Sidebar-->

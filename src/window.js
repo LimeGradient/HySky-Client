@@ -46,7 +46,6 @@ function createWindow () {
       mc.refreshLogin();
     }
   })
-  mc.checkOptions();
   rpc.startRPC()
 }
 

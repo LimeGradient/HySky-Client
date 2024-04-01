@@ -4,6 +4,7 @@ const { Auth } = require('msmc');
 const { finished } = require('stream');
 const {readdir} = require("fs/promises");
 const {downloadRelease} = require("@terascope/fetch-github-release")
+const {Notification, BrowserWindow} = require('electron')
 
 const crypto = require('crypto')
 const path = require('path')
@@ -44,7 +45,7 @@ async function refreshLogin() {
             const _token = await xboxManager.getMinecraft();
             win.window.getWindow.webContents.send("setSkin", _token.profile.id)
             win.window.getWindow.webContents.send("setName", _token.profile.name)
-        }).catch((err) => console.log(err))
+        }).catch((err) => win.window.getWindow.webContents.send("error", err['response']['status'], err['response']['statusText']))
     })
 }
 
@@ -65,7 +66,7 @@ async function login() {
         win.window.getWindow.webContents.send("loggedIn");
         win.window.getWindow.webContents.send("setSkin", _token.profile.id)
         win.window.getWindow.webContents.send("setName", _token.profile.name)
-    }).catch((err) => console.log(err));
+    }).catch((err) => win.window.getWindow.webContents.send("error", err['response']['status'], err['response']['statusText']));
 }
 
 async function uninstallMod() {
@@ -82,7 +83,9 @@ async function uninstallMod() {
 async function installMod(file) {
     console.log(file)
     if (!fs.existsSync(path.join(storage.getDefaultDataPath(), ".minecraft/mods"))) {
-        fs.mkdirSync(path.join(storage.getDefaultDataPath(), ".minecraft"))
+        if (!fs.existsSync(path.join(storage.getDefaultDataPath(), ".minecraft"))) {
+            fs.mkdirSync(path.join(storage.getDefaultDataPath(), ".minecraft"))
+        }
         fs.mkdirSync(path.join(storage.getDefaultDataPath(), ".minecraft/mods"))
     }
     const modsJson = JSON.parse(fs.readFileSync(path.join(__dirname, "mods.json"), 'utf8'))
@@ -94,7 +97,7 @@ async function installMod(file) {
             }, (asset) => {
                 return asset.name.includes('.jar')
             }, false, false).then(() => {
-                console.log(`[Lime]: $${file} Installed`)
+                console.log("[Lime]: Mod Installed")
             }).catch((err) => {
                 console.error(err.message)
             })
@@ -146,19 +149,6 @@ async function checkForge() {
     window.getWindow.webContents.send("mcConsole", '[Lime]: Forge Installed')
 }
 
-async function checkOptions() {
-    if (fs.existsSync(path.join(storage.getDefaultDataPath(), `/.minecraft/options.txt`))) return;
-    if (fs.existsSync(path.join(storage.getDefaultDataPath(), `/.minecraft/optionsof.txt`))) return;
-
-    fs.mkdirSync(path.join(storage.getDefaultDataPath(), "/.minecraft"));
-
-    fs.appendFile(path.join(storage.getDefaultDataPath(), "/.minecraft/options.txt"), '', (err) => {if (err) throw err})
-    fs.appendFile(path.join(storage.getDefaultDataPath(), "/.minecraft/optionsof.txt"), '', (err) => {if (err) throw err})
-
-    fs.copyFile(path.join(__dirname, "mc/options.txt"), path.join(storage.getDefaultDataPath(), "/.minecraft/options.txt"), (err) => {if (err) throw err})
-    fs.copyFile(path.join(__dirname, "mc/optionsof.txt"), path.join(storage.getDefaultDataPath(), "/.minecraft/optionsof.txt"), (err) => {if (err) throw err})
-}
-
 async function launchGame() {
     checkForge()
     let opts = {
@@ -200,4 +190,3 @@ exports.checkJava = checkJava;
 exports.refreshLogin = refreshLogin;
 exports.logout = logout;
 exports.uninstallMod = uninstallMod;
-exports.checkOptions = checkOptions;
