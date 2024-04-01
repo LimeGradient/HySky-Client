@@ -6,6 +6,8 @@ const fs = require('fs')
 const { finished, Readable } = require('stream');
 const rpc = require('./rpc');
 
+if (require('electron-squirrel-startup')) return;
+
 const mcToken = {
     mcToken: null,
     profile: null,
@@ -46,6 +48,7 @@ function createWindow () {
       mc.refreshLogin();
     }
   })
+  mc.updateMods()
   rpc.startRPC()
 }
 

@@ -1,46 +1,57 @@
 {
-    "bazaarnotifier": {
-        "user": "symt",
-        "repo": "BazaarNotifier"
-    },
-    "cowlection": {
-        "user": "cow-mc",
-        "repo": "Cowlection"
-    },
-    "dankersskyblockmod": {
-        "user": "bowser0000",
-        "repo": "SkyblockMod"
-    },
-    "dungeonrooms": {
-        "user": "Quantizr",
-        "repo": "DungeonRoomsMod"
-    },
-    "dungeonsguide": {
-        "user": "Dungeons-Guide",
-        "repo": "Skyblock-Dungeons-Guide"
-    },
-    "hytilsreborn": {
-        "user": "Polyfrost",
-        "repo": "Hytils-Reborn"
-    },
-    "notenoughupdates": {
-        "user": "Moulberry",
-        "repo": "NotEnoughUpdates"
-    },
-    "scrollabletooltips": {
-        "user": "Sk1erLLC",
-        "repo": "ScrollableTooltips"
-    },
-    "skyblockaddons": {
-        "user": "BiscuitDevelopment",
-        "repo": "SkyblockAddons"
-    },
-    "skyblockpersonalized": {
-        "user": "Cobble8",
-        "repo": "SkyblockPersonalized"
-    },
-    "skytils": {
-        "user": "Skytils",
-        "repo": "SkytilsMod"
-    }
+  "bazaarnotifier": {
+    "user": "symt",
+    "repo": "BazaarNotifier",
+    "installed": false
+  },
+  "cowlection": {
+    "user": "cow-mc",
+    "repo": "Cowlection",
+    "installed": false
+  },
+  "dankersskyblockmod": {
+    "user": "bowser0000",
+    "repo": "SkyblockMod",
+    "installed": false
+  },
+  "dungeonrooms": {
+    "user": "Quantizr",
+    "repo": "DungeonRoomsMod",
+    "installed": false
+  },
+  "dungeonsguide": {
+    "user": "Dungeons-Guide",
+    "repo": "Skyblock-Dungeons-Guide",
+    "installed": true
+  },
+  "hytilsreborn": {
+    "user": "Polyfrost",
+    "repo": "Hytils-Reborn",
+    "installed": false
+  },
+  "notenoughupdates": {
+    "user": "Moulberry",
+    "repo": "NotEnoughUpdates",
+    "installed": false
+  },
+  "scrollabletooltips": {
+    "user": "Sk1erLLC",
+    "repo": "ScrollableTooltips",
+    "installed": false
+  },
+  "skyblockaddons": {
+    "user": "BiscuitDevelopment",
+    "repo": "SkyblockAddons",
+    "installed": false
+  },
+  "skyblockpersonalized": {
+    "user": "Cobble8",
+    "repo": "SkyblockPersonalized",
+    "installed": false
+  },
+  "skytils": {
+    "user": "Skytils",
+    "repo": "SkytilsMod",
+    "installed": false
+  }
 }

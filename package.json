@@ -10,7 +10,7 @@
     "make": "electron-forge make",
     "build-all": "npm run build-macos && npm run build-win",
     "build-macos": "npx electron-packager ./ --platform=darwin --icon=dmg/icon.icns --overwrite && rm -f dmg/build/HySky-Installer.dmg && npx appdmg dmg/dmg.json dmg/build/HySky-Installer.dmg",
-    "build-win": "npx electron-packager ./ --platform=win32 --icon=resources/icon.ico --overwrite"
+    "build-win": "npx electron-packager ./ --platform=win32 --icon=resources/icon.ico --overwrite && node src/installer.js"
   },
   "exports": {
     "./*": "./src/*.js"
@@ -23,6 +23,7 @@
     "discord-rpc": "^4.0.1",
     "electron-installer-windows": "^3.0.0",
     "electron-json-storage": "^4.6.0",
+    "electron-squirrel-startup": "^1.0.0",
     "minecraft-launcher-core": "^3.17.3",
     "msmc": "^4.1.0"
   },
@@ -31,6 +32,7 @@
     "@electron-forge/maker-zip": "^6.4.2",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
     "electron": "^27.0.3",
-    "electron-installer-dmg": "^4.0.0"
+    "electron-installer-dmg": "^4.0.0",
+    "electron-winstaller": "^5.3.0"
   }
 }

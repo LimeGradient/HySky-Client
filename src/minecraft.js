@@ -90,7 +90,7 @@ async function installMod(file) {
     }
     const modsJson = JSON.parse(fs.readFileSync(path.join(__dirname, "mods.json"), 'utf8'))
     for (const mod in modsJson) {
-        if (mod == file) {
+        if (mod == file && modsJson[mod].installed == false) {
             const currentMod = modsJson[mod]
             downloadRelease(currentMod.user, currentMod.repo, path.join(storage.getDefaultDataPath(), ".minecraft/mods"), (release) => {
                 return release.prerelease === false;
@@ -98,6 +98,32 @@ async function installMod(file) {
                 return asset.name.includes('.jar')
             }, false, false).then(() => {
                 console.log("[Lime]: Mod Installed")
+                currentMod.installed = true
+                modsJson[mod] = currentMod
+                fs.writeFile(path.join(__dirname, "mods.json"), JSON.stringify(modsJson, null, 2), () => console.log("Wrote mod data to mods.json"))
+            }).catch((err) => {
+                console.error(err.message)
+            })
+        }
+    }
+}
+
+async function updateMods() {
+    if (!fs.existsSync(path.join(storage.getDefaultDataPath(), ".minecraft/mods"))) return;
+
+    const modsJson = JSON.parse(fs.readFileSync(path.join(__dirname, "mods.json"), 'utf8'))
+    for (const mod in modsJson) {
+        if (modsJson[mod].installed == true) {
+            const currentMod = modsJson[mod]
+            downloadRelease(currentMod.user, currentMod.repo, path.join(storage.getDefaultDataPath(), ".minecraft/mods"), (release) => {
+                return release.prerelease === false;
+            }, (asset) => {
+                return asset.name.includes('.jar')
+            }, false, false).then(() => {
+                console.log("[Lime]: Mod Installed")
+                currentMod.installed = true
+                modsJson[mod] = currentMod
+                fs.writeFile(path.join(__dirname, "mods.json"), JSON.stringify(modsJson, null, 2), () => console.log("Wrote mod data to mods.json"))
             }).catch((err) => {
                 console.error(err.message)
             })
@@ -190,3 +216,4 @@ exports.checkJava = checkJava;
 exports.refreshLogin = refreshLogin;
 exports.logout = logout;
 exports.uninstallMod = uninstallMod;
+exports.updateMods = updateMods;
