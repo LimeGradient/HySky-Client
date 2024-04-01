@@ -77,6 +77,7 @@ async function uninstallMod() {
         files.forEach((file) => {
             fs.unlink(path.join(storage.getDefaultDataPath(), `/.minecraft/mods/${file}`), (err) => {if (err) throw err})
         })
+        win.window.getWindow.webContents.send("mcConsole", '[HySky]: Uninstalled Mods')
     })
 }
 
@@ -101,6 +102,7 @@ async function installMod(file) {
                 currentMod.installed = true
                 modsJson[mod] = currentMod
                 fs.writeFile(path.join(__dirname, "mods.json"), JSON.stringify(modsJson, null, 2), () => console.log("Wrote mod data to mods.json"))
+                win.window.getWindow.webContents.send("mcConsole", `[HySky]: Installed Mod ${currentMod.name}`)
             }).catch((err) => {
                 console.error(err.message)
             })

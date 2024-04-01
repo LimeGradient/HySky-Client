@@ -1,55 +1,66 @@
 {
   "bazaarnotifier": {
+    "name": "BazaarNotifier",
     "user": "symt",
     "repo": "BazaarNotifier",
     "installed": false
   },
   "cowlection": {
+    "name": "Cowlection",
     "user": "cow-mc",
     "repo": "Cowlection",
     "installed": false
   },
   "dankersskyblockmod": {
+    "name": "Dankers' Skyblock Mod",
     "user": "bowser0000",
     "repo": "SkyblockMod",
-    "installed": false
+    "installed": true
   },
   "dungeonrooms": {
+    "name": "Dungeon Rooms",
     "user": "Quantizr",
     "repo": "DungeonRoomsMod",
-    "installed": false
+    "installed": true
   },
   "dungeonsguide": {
+    "name": "Dungeons Guide",
     "user": "Dungeons-Guide",
     "repo": "Skyblock-Dungeons-Guide",
     "installed": true
   },
   "hytilsreborn": {
+    "name": "Hytils Reborn",
     "user": "Polyfrost",
     "repo": "Hytils-Reborn",
     "installed": false
   },
   "notenoughupdates": {
+    "name": "Not Enough Updates",
     "user": "Moulberry",
     "repo": "NotEnoughUpdates",
     "installed": false
   },
   "scrollabletooltips": {
+    "name": "Scrollable Tooltips",
     "user": "Sk1erLLC",
     "repo": "ScrollableTooltips",
     "installed": false
   },
   "skyblockaddons": {
+    "name": "Skyblock Addons",
     "user": "BiscuitDevelopment",
     "repo": "SkyblockAddons",
     "installed": false
   },
   "skyblockpersonalized": {
+    "name": "Skyblock Personalized",
     "user": "Cobble8",
     "repo": "SkyblockPersonalized",
     "installed": false
   },
   "skytils": {
+    "name": "Skytils",
     "user": "Skytils",
     "repo": "SkytilsMod",
     "installed": false

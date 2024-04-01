@@ -9,7 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "build-all": "npm run build-macos && npm run build-win",
-    "build-macos": "npx electron-packager ./ --platform=darwin --icon=dmg/icon.icns --overwrite && rm -f dmg/build/HySky-Installer.dmg && npx appdmg dmg/dmg.json dmg/build/HySky-Installer.dmg",
+    "build-macos": "npx electron-packager ./ --platform=darwin --icon=dmg/icon.icns --appname='hyskyclient' --overwrite && rm -f dmg/build/HySky-Installer.dmg && npx appdmg dmg/dmg.json dmg/build/HySky-Installer.dmg",
     "build-win": "npx electron-packager ./ --platform=win32 --icon=resources/icon.ico --overwrite && node src/installer.js"
   },
   "exports": {

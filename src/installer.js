@@ -10,7 +10,7 @@ async function run() {
             outputDirectory: path.join(__dirname, "../build"),
             authors: "LimeGradient",
             exe: "hysky-client.exe",
-            version: "2.0.0",
+            version: "2.0.0.0",
             setupIcon: path.join(__dirname, "../resources/icon.ico"),
             noMsi: false,
             setupExe: "HySky Installer",
