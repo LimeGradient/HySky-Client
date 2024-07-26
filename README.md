@@ -1,4 +1,4 @@
-[![](https://dcbadge.vercel.app/api/server/qNRvgqsBwU)](https://discord.gg/qNRvgqsBwU)
+[![](https://dcbadge.vercel.app/api/server/kmJDjqeEdp)](https://discord.gg/kmJDjqeEdp)
 
 ## This is the official download page. Anywhere else with a download for this client could be trying to hack you
 
@@ -77,7 +77,7 @@ Send a PR Request and ill look it over and decide its fate
 
 # Todo
 <ul>
-<li>Better Looking UI</li>
+<li>Add support for newer MC versions</li>
 <li>Add Config for Mods in the Launcher</li>
 <li>Settings Menu for Minecraft and Other Related Options</li>
 <li>(Possible) Custom API for launcher appearence modding</li>
